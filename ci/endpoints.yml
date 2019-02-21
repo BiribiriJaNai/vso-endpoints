@@ -1,0 +1,71 @@
+name: $(buildDefinitionName)-$(sourceBranchName)-$(date:yyyyMMdd)$(rev:.r)
+resources:
+- repo: self
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - feature/*
+    exclude:
+    - master
+    - develop
+
+pr:
+- develop
+
+pool:
+  name: Azure
+  demands: npm
+
+variables:
+  publisherId: 'biribirijanai'
+  extensionId: 'endpoints'
+  extensionVersion: '0.1.0'
+
+steps:
+
+# clean
+- checkout: self
+  clean: true
+
+# npm install
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+# version dev
+- template: versioning.yml
+  parameters:
+    extensionId: '$(extensionId)-dev'
+    versionFileName: 'version-dev'
+
+# version prod
+- template: versioning.yml
+  parameters:
+    extensionId: $(extensionId)
+    versionFileName: 'version'
+
+# npm run package
+- task: Npm@1
+  displayName: 'npm run package'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run package'
+
+# copy files
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: dist
+    Contents: '**/**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+# publish artifacts
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: extensions'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: extensions

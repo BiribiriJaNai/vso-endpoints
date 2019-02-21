@@ -1,0 +1,39 @@
+{
+    "contributions": [
+        {
+            "id": "biribirijanai.endpoints.eip-service",
+            "description": "EIP Service",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "eip-service",
+                "displayName": "EIP Service",
+                "icon": "static/icon-eipsvc-endpoint.png",
+                "url": {
+                    "displayName": "EIP Service URL",
+                    "helpText": "URL for EIP Service to connect to"
+                },
+                "helpMarkDown": "[More information]()",
+                "authenticationSchemes": [
+                    {
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-basic"
+                    }
+                ],
+                "inputDescriptors": [
+                    {
+                        "id": "pemContent",
+                        "name": "Certificate content",
+                        "description": "Provide PEM file content",
+                        "inputMode": "textArea",
+                        "isConfidential": true,
+                        "validation": {
+                            "dataType": "string"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

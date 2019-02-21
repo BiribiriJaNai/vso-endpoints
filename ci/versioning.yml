@@ -1,0 +1,25 @@
+parameters:
+  extensionId: ''
+  versionFileName: ''
+
+steps:
+
+# query version
+- task: ExtensionVersion@1
+  displayName: 'Query ${{ parameters.extensionId }} version'
+  inputs:
+    connectedServiceName: 'Marketplace'
+    publisherId: $(publisherId)
+    extensionId: ${{ parameters.extensionId }}
+    versionAction: Patch
+    outputVariable: extensionVersion
+    extensionVersionOverride: extensionVersionOverride
+
+# write version
+- task: file-creator@4
+  displayName: 'Set ${{ parameters.extensionId }} version'
+  inputs:
+    fileoverwrite: true
+    filepath: '${{ parameters.versionFileName }}.json'
+    filecontent: '{"version": "$(extensionVersion)"}'
+    endWithNewLine: true

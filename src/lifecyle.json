@@ -1,0 +1,44 @@
+{
+    "contributions": [
+        {
+            "id": "biribirijanai.endpoints.lifecycle",
+            "description": "Nexus IQ",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "lifecycle",
+                "displayName": "Nexus IQ",
+                "icon": "static/icon-lifecycle-endpoint.png",
+                "url": {
+                    "displayName": "Nexus IQ Server URL",
+                    "helpText": "URL for Nexus IQ Server to connect to"
+                },
+                "helpMarkDown": "[More information]()",
+                "authenticationSchemes": [
+                    {
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-basic"
+                    }
+                ],
+                "dataSources": [
+                    {
+                        "name": "TestConnection",
+                        "endpointUrl": "{{{endpoint.url}}}/api/v2/organizations",
+                        "resultSelector": "jsonpath:$.organizations[?(@.id=='ROOT_ORGANIZATION_ID')]"
+                    },
+                    {
+                        "name": "Organizations",
+                        "endpointUrl": "{{{endpoint.url}}}/api/v2/organizations",
+                        "resultSelector": "jsonpath:$.organizations[?(@.id!='ROOT_ORGANIZATION_ID')]"
+                    },
+                    {
+                        "name": "Applications",
+                        "endpointUrl": "{{{endpoint.url}}}/api/v2/applications",
+                        "resultSelector": "jsonpath:$.applications[?(@.organizationId=='{{{organizationId}}}')]"
+                    }
+                ]
+            }
+        }
+    ]
+}

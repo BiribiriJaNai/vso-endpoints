@@ -1,0 +1,27 @@
+{
+  "name": "vso-endpoints",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf ./dist/* *.vsix",
+    "version": "node version.js",
+    "package:dev": "tfx extension create --manifest-globs endpoints-extension-dev.json ./src/*.json --output-path ./dist/dev --overrides-file version-dev.json",
+    "package:prod": "tfx extension create --manifest-globs endpoints-extension.json ./src/*.json --output-path ./dist/prod --overrides-file version.json",
+    "package": "npm run clean && npm run package:dev && npm run package:prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BiribiriJaNai/vso-endpoints.git"
+  },
+  "author": "BiribiriJaNai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BiribiriJaNai/vso-endpoints/issues"
+  },
+  "homepage": "https://github.com/BiribiriJaNai/vso-endpoints#readme",
+  "devDependencies": {
+    "rimraf": "^2.6.3",
+    "tfx-cli": "^0.6.4"
+  }
+}

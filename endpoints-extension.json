@@ -1,0 +1,51 @@
+{
+    "manifestVersion": 1,
+    "id": "endpoints",
+    "version": "0.0.1",
+    "name": "Endpoints Collection",
+    "publisher": "biribirijanai",
+    "description": "A custom endpoints collection",
+    "icons": {
+        "default": "static/icon-switch-almdevops.png"
+    },
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "tags": [
+        "Nexus IQ", 
+        "LifeCycle",
+        "EIP"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services.Cloud"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BiribiriJaNai/vso-endpoints.git"
+    }, 
+    "files": [
+        {
+            "path": "static",
+            "addressable": true
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "branding": {
+        "color": "rgb(255, 255, 255)",
+        "theme": "light"
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/BiribiriJaNai/vso-endpoints#readme"
+        },
+        "support": {
+            "uri": "https://github.com/BiribiriJaNai/vso-endpoints/issues"
+        }
+    }
+}
